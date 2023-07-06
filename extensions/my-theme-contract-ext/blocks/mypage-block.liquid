@@ -1,0 +1,40 @@
+<!--
+Send an email to share the customer's portal.
+See https://shopify.dev/docs/apps/selling-strategies/purchase-options/customer-portal/create-customer-portal
+-->
+<fieldset>
+  <legend>My subscription cotract details</legend>
+  <div class="mysub">
+    <label for="mysub_email">Email:</label>
+    <input
+      class="mysub"
+      id="mysub_email"
+      name="email"
+      type="text"
+      value="{{ customer.email }}">
+    <button onclick="mysub_send('{{ shop.url }}');">Send me the portal link of my subscription</button>
+  </div>
+
+  <div id="mysub_res" class="mysub"></div>
+
+  <div class="mysub">
+    <p>Or if you are logged in, you can access your subscription page directly through
+      &#128073;<a href="{{ shop.url }}/apps/mysubpage?event=show" target="_blank">this link</a>.</p>
+  </div>
+
+  <div class="mysub">
+    <p>For the customer portal integration, refer to
+      <a href="https://shopify.dev/docs/apps/selling-strategies/purchase-options/customer-portal/create-customer-portal" target="_blank">dev. doc</a>.
+    </p>
+  </div>
+</fieldset>
+
+{% schema %}
+  {
+    "name": "My Subscription MyPage",
+    "target": "section",
+    "stylesheet": "my-theme-mypage.css",
+    "javascript": "my-theme-mypage.js",
+    "settings": []
+  }
+{% endschema %}

@@ -1,0 +1,3 @@
+# This file stores configurations for your Shopify app.
+
+scopes = " write_products,write_orders,read_customer_payment_methods,write_own_subscription_contracts,write_customers,write_assigned_fulfillment_orders,write_merchant_managed_fulfillment_orders,write_third_party_fulfillment_orders"

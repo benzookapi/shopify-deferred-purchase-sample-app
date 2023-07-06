@@ -1,0 +1,103 @@
+<a!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>My subscription page</title>
+        <link rel="stylesheet" href="<%= app_url %>/mycss.css" />
+        <style>
+        </style>
+    </head>
+
+    <body>
+
+        <div class="Polaris-Box"
+            style="--pc-box-background:var(--p-color-bg-subdued);--pc-box-overflow-x:hidden;--pc-box-overflow-y:hidden;--pc-box-padding-block-end-xs:var(--p-space-4);--pc-box-padding-block-end-sm:var(--p-space-5);--pc-box-padding-block-start-xs:var(--p-space-4);--pc-box-padding-block-start-sm:var(--p-space-5);--pc-box-padding-inline-start-xs:var(--p-space-4);--pc-box-padding-inline-start-sm:var(--p-space-5);--pc-box-padding-inline-end-xs:var(--p-space-4);--pc-box-padding-inline-end-sm:var(--p-space-5);--pc-box-shadow:var(--p-shadow-md)">
+            <div style="float: left;">
+                <h1 class="Polaris-Text--root Polaris-Text--heading4xl">Your subscription data</h1>
+            </div>
+            <div style="float: left; margin-left: 1em;">
+                <button class="Polaris-Button Polaris-Button--primary" type="button" onclick="sendEmail();">
+                    <span class="Polaris-Button__Content">
+                        <span class="Polaris-Button__Text">Send an email to update my payment method</span>
+                    </span>
+                </button>
+            </div>
+            <div style="float: left; margin-left: 1em;">
+                <button class="Polaris-Button" type="button" onclick="updatePayment();">
+                    <span class="Polaris-Button__Content">
+                        <span class="Polaris-Button__Text">Update my payment method here</span>
+                    </span>
+                </button>
+            </div>
+            <div style="float: left; margin-left: 1em;">
+                <span class="Polaris-Badge Polaris-Badge--statusInfo" style="display: none;" id="badge">
+                    <span class="Polaris-Text--root Polaris-Text--visuallyHidden">Info</span>
+                    <span class="Polaris-Text--root Polaris-Text--bodySm" id="result"></span>
+                </span>
+            </div>
+            <div style="clear: both;">
+                <p>For the customer portal integration, refer to
+                    <a href="https://shopify.dev/docs/apps/selling-strategies/purchase-options/customer-portal/create-customer-portal"
+                        target="_blank">dev. doc</a>.
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <pre>
+<%= JSON.stringify(json, null, 4) %>
+        </pre>
+        </div>
+
+        <script>
+            const sendEmail = function () {
+                window.document.getElementById('badge').style.display = 'none';
+                fetch(`mysubpage?event=email&token=<%= token %>`, {
+                    method: "GET"
+                }).then((res) => {
+                    res.json().then((data, errors) => {
+                        if (typeof errors !== 'undefined') {
+                            console.log(`Sending email errors: ${JSON.stringify(errors)}`);
+                            return;
+                        }
+                        console.log(`data: ${JSON.stringify(data)}`);
+                        let html = '';
+                        if (typeof data.Success === 'undefined') {
+                            html = `Sending an mail was Failed. <b>${data.Error}</b>`;
+                        } else {
+                            html = `An email was sent to <b>${data.Success}</b>`;
+                        }
+                        window.document.getElementById('result').innerHTML = html;
+                        window.document.getElementById('badge').style.display = 'inline';
+                    });
+                });
+            };
+            const updatePayment = function () {
+                window.document.getElementById('badge').style.display = 'none';
+                fetch(`mysubpage?event=update&token=<%= token %>`, {
+                    method: "GET"
+                }).then((res) => {
+                    res.json().then((data, errors) => {
+                        if (typeof errors !== 'undefined') {
+                            console.log(`Updating payment errors: ${JSON.stringify(errors)}`);
+                            return;
+                        }
+                        console.log(`data: ${JSON.stringify(data)}`);
+                        let html = '';
+                        if (typeof data.Success === 'undefined') {
+                            html = `Updating payment was Failed. <b>${data.Error}</b>`;
+                        } else {
+                            html = `Click <b><a href="${data.Success}" target="_blank">this link</a></b> to update your payment method.`;
+                        }
+                        window.document.getElementById('result').innerHTML = html;
+                        window.document.getElementById('badge').style.display = 'inline';
+                    });
+                });
+            };
+        </script>
+
+    </body>
+
+    </html>

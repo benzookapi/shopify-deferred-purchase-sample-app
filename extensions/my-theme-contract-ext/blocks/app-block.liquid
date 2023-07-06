@@ -1,0 +1,61 @@
+<!-- 
+  Adding subscription selection to 'cart/add' from provided by each theme.
+  This theme app extension is supposed to be add to the product detail page.
+  See https://shopify.dev/docs/apps/selling-strategies/subscriptions/modeling
+  See https://shopify.dev/docs/api/ajax/reference/cart
+  See https://shopify.dev/docs/themes/pricing-payments/purchase-options/support-purchase-options
+  See https://shopify.dev/docs/themes/pricing-payments/purchase-options/subscription-ux-guidelines
+
+  NOTE THAT writing JavaScript directly in this file sometimes fails in complete DOM loading due to the script insertion timing 
+  in browsers, so DOM handling JavaScript should be in 'assets/***.js' which is insluded in <header></header>.
+
+  Liquid code can be written in this file only so keep the scripts working with Liquid still here.
+
+  Scripts for form manipulation are in 'assets/my-theme-contact.js'.
+  -->
+<fieldset id="my-subscription">
+  <legend>Choose your subscription plan</legend>
+   {% for selling_plan_group in product.selling_plan_groups %}
+    {% for selling_plan in selling_plan_group.selling_plans %}
+      <div>
+        <input
+          type="radio"
+          id="{{ selling_plan.id }}"
+          name="purchase_option"
+          value="{{ selling_plan.id }}"
+          onClick="radio_click(this);"
+          >
+        <label for="{{ selling_plan.id }}">
+          {{ selling_plan.name }} ({{ selling_plan.id }})
+        </label>
+      </div>
+    {% endfor %}
+   {% endfor %}
+   <div>
+      <input
+        type="radio"
+        id="na99999"
+        name="purchase_option"
+        value=""
+        onClick="radio_click(this);" 
+        checked>
+        <label for="na99999">
+          One-time purchase
+        </label>
+      </div>
+   <div>
+    <strong>Follow the 
+      <a href="https://shopify.dev/docs/themes/pricing-payments/purchase-options/subscription-ux-guidelines" target="_blank">
+      UX guidelines</a> for real app development.</strong>
+  </div>
+</fieldset>
+
+{% schema %}
+  {
+    "name": "My Subscription Contract",
+    "target": "section",
+    "stylesheet": "my-theme-contact.css",
+    "javascript": "my-theme-contact.js",
+    "settings": []
+  }
+{% endschema %}
