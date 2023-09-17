@@ -3,7 +3,7 @@ import { useAppBridge } from '@shopify/app-bridge-react';
 import { authenticatedFetch } from "@shopify/app-bridge-utils";
 import { Redirect } from '@shopify/app-bridge/actions';
 import { getSessionToken } from "@shopify/app-bridge-utils";
-import { Page, Card, Layout, Stack, Link, Badge, Text, Spinner, Banner, Button, VerticalStack, Checkbox } from '@shopify/polaris';
+import { Page, Card, Layout, Link, Badge, Text, Spinner, Banner, Button, VerticalStack, Checkbox } from '@shopify/polaris';
 import { CircleRightMajor } from '@shopify/polaris-icons';
 
 import { _getParamValueFromQuery } from "../utils/my_util";
@@ -45,10 +45,10 @@ function Subscriptions() {
                     <Link url="https://shopify.dev/docs/apps/selling-strategies/subscriptions/contracts/create" external={true}>Dev. doc</Link>
                 </Layout.Section>
                 <Layout.Section>
-                    <Stack spacing="loose">
+                    <VerticalStack spacing="loose">
                         <Text as='h2'>Contract id:</Text>
                         <Badge status='info'>{id}</Badge>
-                    </Stack>
+                    </VerticalStack>
                 </Layout.Section>
                 <Layout.Section>
                     <Card>

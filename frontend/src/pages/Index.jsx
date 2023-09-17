@@ -1,5 +1,5 @@
 import { useAppBridge } from '@shopify/app-bridge-react';
-import { Page, VerticalStack, AlphaCard, Layout, Text, Link, Badge, FooterHelp } from '@shopify/polaris';
+import { Page, VerticalStack, Card, Layout, Text, Link, Badge, FooterHelp } from '@shopify/polaris';
 
 import { _getAdminFromShop, _getShopFromQuery } from "../utils/my_util";
 
@@ -13,7 +13,7 @@ function Index() {
         <>
             <Page title="How to try this app subscription">
                 <VerticalStack gap="3">
-                    <AlphaCard padding="4">
+                    <Card padding="4">
                         <Layout>
                             <Layout.Section>
                                 <Text as="h2" fontWeight="bold">Step 1. Create your plans for products</Text>
@@ -22,8 +22,8 @@ function Index() {
                                 Go to <Link url={`https://${_getAdminFromShop(shop)}/products`} external={true}>Products</Link> and make your <Link url={`https://shopify.dev/docs/apps/selling-strategies/subscriptions/modeling#plan-setup`} external={true}>selling plans</Link> at <Badge status="info">[Purchase options] &gt; [Create a new option] in each product details</Badge> built as <Link url={`https://github.com/benzookapi/shopify-subscription-sample-app/blob/main/extensions/my-subscription-ext/src/index.jsx`} external={true}>Admin UI extension</Link>.
                             </Layout.Section>
                         </Layout>
-                    </AlphaCard>
-                    <AlphaCard padding="4">
+                    </Card>
+                    <Card padding="4">
                         <Layout>
                             <Layout.Section>
                                 <Text as="h2" fontWeight="bold">Step 2. Insert your plan selector into the product detail page</Text>
@@ -32,8 +32,8 @@ function Index() {
                                 Go to <Badge status="info"><Link url={`https://${shop}/admin/themes/current/editor?template=product&addAppBlockId=${SHOPIFY_CONTRACT_EXT_ID}%2Fapp-block&target=newAppsSection`} external={true}>Product detail page editor with this app block</Link></Badge> to enable the plan selector built as <Link url={`https://github.com/benzookapi/shopify-subscription-sample-app/blob/main/extensions/my-theme-contract-ext/blocks/app-block.liquid`} external={true}>Theme app extension</Link>.
                             </Layout.Section>
                         </Layout>
-                    </AlphaCard>
-                    <AlphaCard padding="4">
+                    </Card>
+                    <Card padding="4">
                         <Layout>
                             <Layout.Section>
                                 <Text as="h2" fontWeight="bold">Step 3. Insert your customer portal (my page) into the customer login and account page</Text>
@@ -48,8 +48,8 @@ function Index() {
                                 Also, check if <Link url={`https://${shop}/apps/mysubpage`} external={true}>your app proxy url</Link> works fine with a JSON response which provides the customer page under the shop domain.
                             </Layout.Section>
                         </Layout>
-                    </AlphaCard>
-                    <AlphaCard padding="4">
+                    </Card>
+                    <Card padding="4">
                         <Layout>
                             <Layout.Section>
                                 <Text as="h2" fontWeight="bold">Step 4. Make your first order through the checkout to create the following ones as subscription</Text>
@@ -64,8 +64,8 @@ function Index() {
                                 In <Link url={`https://${_getAdminFromShop(shop)}/orders`} external={true}>Orders</Link> again, you will see the 2nd, 3rd, ... orders made by billing attempts to know how you should handle recursive process as real subscription based on customer's contracts.
                             </Layout.Section>
                         </Layout>
-                    </AlphaCard>
-                    <AlphaCard padding="4">
+                    </Card>
+                    <Card padding="4">
                         <Layout>
                             <Layout.Section>
                                 <Text as="h2" fontWeight="bold">Step 5. Check customer's portal to update their payment methods</Text>
@@ -77,7 +77,7 @@ function Index() {
                                 <Badge status="info">[Send an email to update my payment method]</Badge> at the portal page accessed from the link generated above, <Link url={`https://shopify.dev/docs/apps/selling-strategies/purchase-options/customer-portal/create-customer-portal`} external={true}>sends an email to the customer address or update directly (this has some limitations)</Link> with the checkout link to update their payment method.
                             </Layout.Section>
                         </Layout>
-                    </AlphaCard>
+                    </Card>
                 </VerticalStack>
             </Page>
             <FooterHelp>

@@ -12,7 +12,7 @@
     "@shopify/app-bridge": "^3.7.6",
     "@shopify/app-bridge-react": "^3.7.6",
     "@shopify/app-bridge-utils": "^3.5.1",
-    "@shopify/polaris": "^10.45.0",
+    "@shopify/polaris": "^11.19.0",
     "@shopify/react-i18n": "^7.7.2",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
@@ -22,7 +22,7 @@
   "devDependencies": {
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.9",
-    "@vitejs/plugin-react": "^3.0.0",
+    "@vitejs/plugin-react": "^4.0.4",
     "vite": "^4.0.0"
   }
 }
