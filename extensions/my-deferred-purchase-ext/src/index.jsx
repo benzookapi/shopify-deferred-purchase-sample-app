@@ -10,6 +10,7 @@ import {
   BlockStack,
   InlineStack,
   Text,
+  Radio,
   TextBlock,
   TextField,
   Button,
@@ -37,9 +38,11 @@ extend(
 
 // *NOTE THAT The raw app url as the backend is not configurable unlike other extensions
 //const APP_URL = `YOUR_APP_URL_IN_APP_SETTINGS (https://xxxxxxx without the last slash '/')`;
-const APP_URL = `https://shopify-deferred-purchase-sample-app.onrender.com`;
+//const APP_URL = `https://shopify-deferred-purchase-sample-app.onrender.com`;
+const APP_URL = `https://recommends-collapse-responses-privacy.trycloudflare.com`;
 
 // See https://shopify.dev/docs/apps/selling-strategies/purchase-options/app-extensions/extension-points#product-details-page
+// See https://shopify.dev/docs/api/product-subscription-extensions/components
 function App() {
   const { extensionPoint } = useExtensionApi();
   const data = useData();
@@ -112,10 +115,14 @@ function Create() {
 
   console.log(`data: ${JSON.stringify(data)}`);
 
+  const [category, setCategory] = useState('PRE_ORDER');
+  const categoryChange = useCallback((newCategory) => setCategory(newCategory), []);
   const [title, setTitle] = useState('');
   const titleChange = useCallback((newTitle) => setTitle(newTitle), []);
-  const [days, setDays] = useState(1);
+  const [days, setDays] = useState(14);
   const daysChange = useCallback((newDays) => setDays(newDays), []);
+  const [percentage, setPercentage] = useState(20);
+  const percentageChange = useCallback((newPercentage) => setPercentage(newPercentage), []);
 
   return (
     <BlockStack>
@@ -124,7 +131,7 @@ function Create() {
         Components for Admin UI Extensions</Link>.</TextBlock>
       <Banner
         status="info"
-        title="Creat a subscription plan"
+        title="Creat a deferred purchase option"
       >
       </Banner>
       <Card title="Your selected data" sectioned="true">
@@ -135,7 +142,27 @@ function Create() {
           <Text appearance="subdued" emphasized>Variant:</Text><Text appearance="code">{data.variantId}</Text>
         </InlineStack>
       </Card>
-      <Card title="Input your subscription details" sectioned="true">
+      <Card title="Input your deferred purchase option details" sectioned="true">
+        <InlineStack spacing="loose">
+          <Radio
+            label="Pre-order"
+            helpText="Choose your purchase category"
+            checked={category === 'PRE_ORDER'}
+            id="preorder"
+            name="category"
+            value="PRE_ORDER"
+            onChange={categoryChange}
+          />
+          <Radio
+            label="TBYB (Try-before-you-buy)"
+            helpText="Choose your purchase category"
+            checked={category === 'TRY_BEFORE_YOU_BUY'}
+            id="tbyb"
+            name="category"
+            value="TRY_BEFORE_YOU_BUY"
+            onChange={categoryChange}
+          />
+        </InlineStack>
         <InlineStack spacing="loose">
           <TextField
             type="text"
@@ -147,16 +174,24 @@ function Create() {
         <InlineStack spacing="loose">
           <TextField
             type="number"
-            label="Delivery frequency in DAYS"
+            label="How many days after you charge"
             value={days}
             onChange={daysChange}
+          />
+        </InlineStack>
+        <InlineStack spacing="loose">
+          <TextField
+            type="number"
+            label="Deposit percentage (for Pre-order only)"
+            value={percentage}
+            onChange={percentageChange}
           />
         </InlineStack>
         <InlineStack spacing="loose" inlineAlignment="trailing">
           <Button title="Cancel" onPress={() => { close(); }}></Button>
           <Button kind="primary" title="Create a plan" onPress={() => {
             getSessionToken().then((token) => {
-              const url = `${APP_URL}/plans?event=create&product_id=${data.productId}&variant_id=${typeof data.variantId === 'undefined' ? '' : data.variantId}&title=${title}&days=${days}`;
+              const url = `${APP_URL}/plans?event=create&product_id=${data.productId}&variant_id=${typeof data.variantId === 'undefined' ? '' : data.variantId}&category=${category}&title=${title}&days=${days}&percentage=${percentage}`;
               console.log(`Accessing... ${url}`);
               fetch(url, {
                 method: "POST",

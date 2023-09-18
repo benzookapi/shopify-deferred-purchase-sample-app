@@ -45,7 +45,7 @@ Start command = npm run start (= node app.js)
 cd NGROK_DIR && ngrok http 3000
 ```
 
-4. Set `YOUR_APP_URL` (your ngrok or other platform `root` URL) and `YOUR_APP_URL/callback` to your app settings in [partner dashboard](https://partners.shopify.com/) and also **replace `const APP_URL=... in extensions/my-subscription-ext/src/index.jsx` with `YOUR_APP_URL` manually**.
+4. Set `YOUR_APP_URL` (your cloudflare or other platform `root` URL) and `YOUR_APP_URL/callback` to your app settings in [partner dashboard](https://partners.shopify.com/) and also **replace `const APP_URL=... in extensions/my-deferred-purchase-ext/src/index.jsx` with `YOUR_APP_URL` manually**.
 
 5. (For PostgreSQL or MySQL users only,) create the following table in your database (in `psql` or `mysql` command or other tools).
 ```
@@ -78,6 +78,9 @@ Or
 # Sample list
 
 All sample videos are available at [Wiki](https://github.com/benzookapi/shopify-subscription-sample-app/wiki).
+
+# Trouble shooting
+- If you cannot see any selling plans in your product pages in the storefront with the app extension in your dev. store, **activate Shopify Payment test mode or PayPal live mode** because Shopify purchase options (subscription / deferred purchase) limits the available payment methods (even if you activate PayPal, you can use Boogus gateway for test credit card peyment, tho...).
 
 # TIPS
 

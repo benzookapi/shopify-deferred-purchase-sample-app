@@ -11,7 +11,7 @@ function Index() {
 
     return (
         <>
-            <Page title="How to try this app subscription">
+            <Page title="How to try this deferred purchase options (Pre-order / Try-before-you-buy)">
                 <VerticalStack gap="3">
                     <Card padding="4">
                         <Layout>
@@ -19,7 +19,7 @@ function Index() {
                                 <Text as="h2" fontWeight="bold">Step 1. Create your plans for products</Text>
                             </Layout.Section>
                             <Layout.Section>
-                                Go to <Link url={`https://${_getAdminFromShop(shop)}/products`} external={true}>Products</Link> and make your <Link url={`https://shopify.dev/docs/apps/selling-strategies/subscriptions/modeling#plan-setup`} external={true}>selling plans</Link> at <Badge status="info">[Purchase options] &gt; [Create a new option] in each product details</Badge> built as <Link url={`https://github.com/benzookapi/shopify-subscription-sample-app/blob/main/extensions/my-subscription-ext/src/index.jsx`} external={true}>Admin UI extension</Link>.
+                                Go to <Link url={`https://${_getAdminFromShop(shop)}/products`} external={true}>Products</Link> and make your <Link url={`https://shopify.dev/docs/apps/selling-strategies/purchase-options/deferred/modeling#plan-setup`} external={true}>selling plans</Link> at <Badge status="info">[Purchase options] &gt; [Create a new option] in each product details</Badge> built as <Link url={`https://github.com/benzookapi/shopify-subscription-sample-app/blob/main/extensions/my-subscription-ext/src/index.jsx`} external={true}>Admin UI extension</Link>.
                             </Layout.Section>
                         </Layout>
                     </Card>

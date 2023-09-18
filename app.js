@@ -187,8 +187,11 @@ router.get('/callback', async (ctx, next) => {
 /* --- Plan create / update CORS endpoint --- */
 // Sandbox Web Workers used by Admin UI Extensions requires CORS access.
 /* Accessed like this from Web Workers.
-fetch(`https://fb34-2400-2410-2fc0-fb00-d4e2-f57f-90a6-bdd6.jp.ngrok.io/create?your_key=your_value&token=YOUR_SESSION_TOKEN`, {
-      method: "POST"
+fetch(`https://electrical-providing-union-visitor.trycloudflare.com/create?your_key=your_value`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${YOUR_SESSION_TOKEN}`,
+      },
     }).then(res => {
       res.json().then(json => {
         console.log(`${JSON.stringify(json)}`);
@@ -205,33 +208,28 @@ router.post('/plans', async (ctx, next) => {
   console.log(`query ${JSON.stringify(ctx.request.query, null, 4)}`);
   console.log(`body ${JSON.stringify(ctx.request.body, null, 4)}`);
 
-  // if a wrong token is passed with a ummatched signature, decodeJWT fails with an exeption = works as verification as well.
-  let decoded_token = null;
-  try {
-    decoded_token = decodeJWT(ctx.request.query.token);
-  } catch (e) {
-    console.log(`${e}`);
-  }
-  if (decoded_token == null) {
-    ctx.body = { "Error": "Wrong token passed." };
+  const token = getTokenFromAuthHeader(ctx);
+  if (!checkAuthFetchToken(token)[0]) {
+    ctx.body = { "Error": "Signature unmatched. Incorrect authentication bearer sent" };
     ctx.status = 400;
     return;
   }
-  console.log(`decoded_token ${JSON.stringify(decoded_token, null, 4)}`);
 
-  const shop = getShopFromAuthToken(ctx.request.query.token);
+  const shop = getShopFromAuthToken(token);
 
   const event = typeof ctx.request.query.event === UNDEFINED ? '' : ctx.request.query.event;
+
+  const category = typeof ctx.request.query.category === UNDEFINED ? 'PRE_ORDER' : ctx.request.query.category;
 
   const product_id = ctx.request.query.product_id;
   const variant_id = ctx.request.query.variant_id;
   const group_id = ctx.request.query.group_id;
-  const variants = ctx.request.query.variants;
 
   const title = ctx.request.query.title;
   const days = parseInt(ctx.request.query.days);
+  const percentage = parseInt(ctx.request.query.percentage);
 
-  // See https://shopify.dev/docs/apps/selling-strategies/subscriptions/selling-plans/manage
+  // See https://shopify.dev/docs/apps/selling-strategies/purchase-options/deferred/deferred-purchase-options
   let ql = ``;
   let variables = null;
   switch (event) {
@@ -253,51 +251,94 @@ router.post('/plans', async (ctx, next) => {
             }
             }
         }`;
-      variables = {
-        "input": {
-          "merchantCode": "my-subscription",
-          "name": "My Subscription",
-          "options": [
-            "My Daily Option 1"
-          ],
-          "position": 1,
-          "sellingPlansToCreate": [
-            {
-              "name": title,
-              "options": "1 Day(s)",
-              "position": 1,
-              "category": "SUBSCRIPTION",
-              "billingPolicy": {
-                "recurring": {
-                  "interval": "DAY",
-                  "intervalCount": days
-                }
-              },
-              "deliveryPolicy": {
-                "recurring": {
-                  "interval": "DAY",
-                  "intervalCount": days,
-                  "preAnchorBehavior": "ASAP",
-                  "cutoff": 0,
-                  "intent": "FULFILLMENT_BEGIN"
-                }
-              },
-              "pricingPolicies": [
-              ]
-            }
-          ],
-          "sellingPlansToDelete": [
-          ],
-          "sellingPlansToUpdate": [
-          ]
-        },
-        "resources": {
-          "productIds": [
-            product_id
-          ],
-          "productVariantIds": (variant_id === '' ? [] : [variant_id])
-        }
-      };
+
+      if (category === 'PRE_ORDER') {
+        variables = {
+          "input": {
+            "merchantCode": "my-deferred-purchase-pre-order",
+            "name": "My Deferred Purchase (Pre-order)",
+            "options": [
+              "My Pre-order 1"
+            ],
+            "sellingPlansToCreate": [
+              {
+                "name": title,
+                "options": [`${percentage}% deposit. Balance due on ${days} later`],
+                "category": "PRE_ORDER",
+                "billingPolicy": {
+                  "fixed": {
+                    "checkoutCharge": { "type": "PERCENTAGE", "value": { "percentage": percentage } },
+                    "remainingBalanceChargeTrigger": "TIME_AFTER_CHECKOUT",
+                    "remainingBalanceChargeTimeAfterCheckout": `P${days}D`
+                  }
+                },
+                "deliveryPolicy": {
+                  "fixed": { "fulfillmentTrigger": "UNKNOWN" }
+                },
+                "pricingPolicies": [
+                  {
+                    "fixed": {
+                      "adjustmentType": "PERCENTAGE",
+                      "adjustmentValue": { "percentage": percentage * 0.8 }
+                    }
+                  }
+                ],
+                "inventoryPolicy": { "reserve": "ON_FULFILLMENT" }
+              }
+            ],
+            "sellingPlansToDelete": [
+            ],
+            "sellingPlansToUpdate": [
+            ]
+          },
+          "resources": {
+            "productIds": [
+              product_id
+            ],
+            "productVariantIds": (variant_id === '' ? [] : [variant_id])
+          }
+        };
+      } else {
+        variables = {
+          "input": {
+            "merchantCode": "my-deferred-purchase-try-before-you-buy",
+            "name": "My Deferred Purchase (Try-before-you-buy)",
+            "options": [
+              "My TBYB 1"
+            ],
+            "position": 1,
+            "sellingPlansToCreate": [
+              {
+                "name": title,
+                "options": [`Try free for ${days} days`],
+                "category": "TRY_BEFORE_YOU_BUY",
+                "billingPolicy": {
+                  "fixed": {
+                    "checkoutCharge": { "type": "PRICE", "value": { "fixedValue": 0 } },
+                    "remainingBalanceChargeTrigger": "TIME_AFTER_CHECKOUT",
+                    "remainingBalanceChargeTimeAfterCheckout": `P${days}D`
+                  }
+                },
+                "deliveryPolicy": {
+                  "fixed": { "fulfillmentTrigger": "ASAP" }
+                },
+                "inventoryPolicy": { "reserve": "ON_SALE" }
+              }
+            ],
+            "sellingPlansToDelete": [
+            ],
+            "sellingPlansToUpdate": [
+            ]
+          },
+          "resources": {
+            "productIds": [
+              product_id
+            ],
+            "productVariantIds": (variant_id === '' ? [] : [variant_id])
+          }
+        };
+
+      }
       break;
     case 'remove':
       //TBD
@@ -318,27 +359,34 @@ router.post('/plans', async (ctx, next) => {
                 node {
                   id
                   name
+                  category
                   billingPolicy {
-                    ... on SellingPlanRecurringBillingPolicy {
-                      interval
-                      intervalCount
-                      anchors {
-                        cutoffDay
-                        day
-                        month
+                    ... on SellingPlanFixedBillingPolicy {
+                      checkoutCharge {
                         type
+                        value
                       }
+                      remainingBalanceChargeExactTime
+                      remainingBalanceChargeTimeAfterCheckout
+                      remainingBalanceChargeTrigger
                     }
                   }
                   deliveryPolicy {
-                    ... on SellingPlanRecurringDeliveryPolicy {
+                    ... on SellingPlanFixedDeliveryPolicy {
                       anchors {
                         cutoffDay
                         day
                         month
                         type
                       }
+                      fulfillmentExactTime
+                      fulfillmentTrigger
+                      intent
+                      preAnchorBehavior
                     }
+                  }
+                  inventoryPolicy {
+                    reserve
                   }
                 }
               }
