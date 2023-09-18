@@ -40,9 +40,9 @@ Build command = npm install && npm run build (= cd frontend && npm install && np
 Start command = npm run start (= node app.js)
 ```
 
-3. If you run locally, you need to ngrok tunnel for public URL as follows (otherwise, the command lines above are usable in Render or other cloud platform deploy scripts).
+3. If you run locally, you need to cloudflare tunnel for public URL as follows (otherwise, the command lines above are usable in Render or other cloud platform deploy scripts).
 ```
-cd NGROK_DIR && ngrok http 3000
+cloudflared tunnel --url localhost:3000 
 ```
 
 4. Set `YOUR_APP_URL` (your cloudflare or other platform `root` URL) and `YOUR_APP_URL/callback` to your app settings in [partner dashboard](https://partners.shopify.com/) and also **replace `const APP_URL=... in extensions/my-deferred-purchase-ext/src/index.jsx` with `YOUR_APP_URL` manually**.
