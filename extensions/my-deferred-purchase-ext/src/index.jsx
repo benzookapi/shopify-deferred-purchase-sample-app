@@ -38,8 +38,7 @@ extend(
 
 // *NOTE THAT The raw app url as the backend is not configurable unlike other extensions
 //const APP_URL = `YOUR_APP_URL_IN_APP_SETTINGS (https://xxxxxxx without the last slash '/')`;
-//const APP_URL = `https://shopify-deferred-purchase-sample-app.onrender.com`;
-const APP_URL = `https://recommends-collapse-responses-privacy.trycloudflare.com`;
+const APP_URL = `https://shopify-deferred-purchase-sample-app.onrender.com`;
 
 // See https://shopify.dev/docs/apps/selling-strategies/purchase-options/app-extensions/extension-points#product-details-page
 // See https://shopify.dev/docs/api/product-subscription-extensions/components

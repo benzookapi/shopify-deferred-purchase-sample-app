@@ -58,14 +58,11 @@ For MySQL:
 CREATE TABLE shops ( _id VARCHAR(500) NOT NULL PRIMARY KEY, data JSON NOT NULL, created_at TIMESTAMP NOT NULL, updated_at TIMESTAMP NOT NULL );
 
 ```
-6. For CLI generated extensions, execute `npm run deploy -- --reset` and follow its instruction (choose your partner account, connecting to the exising app, etc.) which registers extensions to your exising app and create `/.env` file which has extensiton ids used by this sample app. After the command ends  successfully, go to the created extension in your [partner dashboard](https://partners.shopify.com/) and enable its dev. preview if available (it's enough for testing in development stores).
+6. Turn **OFF** [Development store preview] in app extensions menu.
 
-7. For updating the extensions, execute `npm run deploy` (without `-- --reset`) to apply (upload) your local modified files to the created extensions (`-- --reset` is used for changing your targeted app only).
+7. For CLI generated extensions, execute `npm run deploy -- --reset` and follow its instruction (choose your partner account, connecting to the exising app, etc.) which registers extensions to your exising app and create `/.env` file which has extensiton ids used by this sample app. After the command ends successfully.
 
-8. (For live stores only, you need to create a version of the extension and publish it. See [this step](https://shopify.dev/apps/deployment/extension).)
-
-9. The customer portal (subscription my page) uses [Shopify App proxies](https://shopify.dev/docs/apps/online-store/app-proxies) and you need to dispatch `YOUR_APP_SERVER_URL/appproxy` (Proxy URL) to `STORE_URL/apps/mysubpage` following [this step](https://shopify.dev/docs/apps/online-store/app-proxies#add-an-app-proxy). Note that the app proxy doesn't accept ngrol bypass URL, so you need a real public endpoint hosted by servers (e.g. Heroku, Fly.io, Render, etc.).
-
+8. For updating the extensions, execute `npm run deploy` (without `-- --reset`) to apply (upload) your local modified files to the created extensions (`-- --reset` is used for changing your targeted app only).
 
 # How to install
 Access to the following endpoit.
@@ -77,7 +74,7 @@ Or
 
 # Sample list
 
-All sample videos are available at [Wiki](https://github.com/benzookapi/shopify-subscription-sample-app/wiki).
+All sample videos are available at [Wiki](https://github.com/benzookapi/shopify-deferred-purchase-sample-app/wiki).
 
 # Trouble shooting
 - If you cannot see any selling plans in your product pages in the storefront through the theme app extension in your dev. store, **try to activate Shopify Payments test mode or PayPal live mode** because Shopify purchase options (subscription / deferred purchase) limit the available payment methods (even if you activate PayPal, you can use Boogus gateway for test credit card payment, tho...).

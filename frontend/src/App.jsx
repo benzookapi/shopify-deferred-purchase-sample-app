@@ -9,7 +9,6 @@ import '@shopify/polaris/build/esm/styles.css';
 //import translations from "@shopify/polaris/locales/en.json";
 
 import Index from './pages/Index';
-import Subscriptions from "./pages/Subscriptions";
 
 import { _getAdminFromShop, _getShopFromQuery } from "./utils/my_util";
 
@@ -63,7 +62,6 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/subscriptions" element={<Subscriptions />} />
           </Routes>
         </BrowserRouter>
         {/* Each page content comes here */}
