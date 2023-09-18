@@ -45,10 +45,10 @@ function App() {
         matcher={(link, location) => link.destination === location.pathname}
       />
       <TitleBar
-        title="Welcome to my subscription app &#9996;"
+        title="Welcome to my deferred pusrchase app &#9996;"
         breadcrumbs={[{ content: "Index", url: '/', target: "APP" }]}
-        primaryAction={{ content: 'Code on GitHub', url: 'https://github.com/benzookapi/shopify-subscription-sample-app', target: "REMOTE", external: true }}
-        secondaryActions={[{ content: 'Dev. site', url: 'https://shopify.dev/docs/apps/selling-strategies/subscriptions/modeling', target: "REMOTE", external: true }]}
+        primaryAction={{ content: 'Code on GitHub', url: 'https://github.com/benzookapi/shopify-deferred-purchase-sample-app', target: "REMOTE", external: true }}
+        secondaryActions={[{ content: 'Dev. site', url: 'https://shopify.dev/docs/apps/selling-strategies/purchase-options/deferred/modeling', target: "REMOTE", external: true }]}
         actionGroups={[{ title: 'Shopify JP Blog', actions: [{ content: 'How to build apps / themes', url: 'https://www.shopify.com/jp/blog/partner-shopify-app-development', target: "REMOTE", external: true }] }]}
       />
       {/* Replacing <AppProvider i18n={translations}> for my own use case. */}
