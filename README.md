@@ -82,8 +82,6 @@ All sample videos are available at [Wiki](https://github.com/benzookapi/shopify-
 # TIPS
 
 - You can use the endpoint of `webhookgdpr` for [GDPR Webhooks](https://shopify.dev/docs/apps/store/security/gdpr-webhooks).
-- If you fail to get [protected customer data](https://shopify.dev/docs/apps/store/data-protection/protected-customer-data) in [subscriptionContract query](https://shopify.dev/docs/api/admin-graphql/unstable/queries/subscriptionContract), apply the customer data request from your app settings in partner dashboard and submit your app first (the submission can be in-review, doesn't have to be completed for dev. store testing) which enable you get them. 
-
 
 # Disclaimer
 
