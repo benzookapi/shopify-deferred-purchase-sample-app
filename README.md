@@ -80,7 +80,7 @@ Or
 All sample videos are available at [Wiki](https://github.com/benzookapi/shopify-subscription-sample-app/wiki).
 
 # Trouble shooting
-- If you cannot see any selling plans in your product pages in the storefront with the app extension in your dev. store, **activate Shopify Payment test mode or PayPal live mode** because Shopify purchase options (subscription / deferred purchase) limits the available payment methods (even if you activate PayPal, you can use Boogus gateway for test credit card peyment, tho...).
+- If you cannot see any selling plans in your product pages in the storefront through the theme app extension in your dev. store, **try to activate Shopify Payments test mode or PayPal live mode** because Shopify purchase options (subscription / deferred purchase) limit the available payment methods (even if you activate PayPal, you can use Boogus gateway for test credit card payment, tho...).
 
 # TIPS
 
