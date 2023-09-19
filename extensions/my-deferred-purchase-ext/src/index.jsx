@@ -145,7 +145,7 @@ function Create() {
         <InlineStack spacing="loose">
           <Radio
             label="Pre-order"
-            helpText="Choose your purchase category"
+            helpText="Charge some at checkout and the rest of amount days later"
             checked={category === 'PRE_ORDER'}
             id="preorder"
             name="category"
@@ -154,7 +154,7 @@ function Create() {
           />
           <Radio
             label="TBYB (Try-before-you-buy)"
-            helpText="Choose your purchase category"
+            helpText="Charge zero at checkout and the full amount days later"
             checked={category === 'TRY_BEFORE_YOU_BUY'}
             id="tbyb"
             name="category"
