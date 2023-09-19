@@ -80,7 +80,7 @@ All sample videos are available at [Wiki](https://github.com/benzookapi/shopify-
 - If you cannot see any selling plans in your product pages in the storefront through the theme app extension in your dev. store, **try to activate Shopify Payments test mode or PayPal live mode** because Shopify purchase options (subscription / deferred purchase) limit the available payment methods (even if you activate PayPal, you can use Boogus gateway for test credit card payment, tho...).
 
 # TIPS
-
+- Note that making selling plans doesn't mean charging the remaining balance and fulfillments are done by Shopify automatically, all those operations need to be done by merchants manually or by the app using corresponding APIs like [orderCreateMandatePayment](https://shopify.dev/docs/api/admin-graphql/unstable/mutations/orderCreateMandatePayment) and [fulfillmentCreateV2](https://shopify.dev/docs/api/admin-graphql/unstable/mutations/fulfillmentCreateV2) as described [here](https://shopify.dev/docs/apps/selling-strategies/purchase-options/deferred#charging-the-remaining-balance). For the app responsibility, check [this page](https://shopify.dev/docs/apps/selling-strategies/purchase-options/deferred/modeling#division-of-responsibilities-between-shopify-and-apps).
 - You can use the endpoint of `webhookgdpr` for [GDPR Webhooks](https://shopify.dev/docs/apps/store/security/gdpr-webhooks).
 
 # Disclaimer

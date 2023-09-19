@@ -29,7 +29,7 @@ function Index() {
                                 <Text as="h2" fontWeight="bold">Step 2. Insert your plan selector into the product detail page</Text>
                             </Layout.Section>
                             <Layout.Section>
-                                Go to <Badge status="info"><Link url={`https://${shop}/admin/themes/current/editor?template=product&addAppBlockId=${SHOPIFY_CONTRACT_EXT_ID}%2Fapp-block&target=newAppsSection`} external={true}>Product detail page editor with this app block</Link></Badge> to enable the plan selector built as <Link url={`https://github.com/benzookapi/shopify-subscription-sample-app/blob/main/extensions/my-theme-contract-ext/blocks/app-block.liquid`} external={true}>Theme app extension</Link>.
+                                Go to <Badge status="info"><Link url={`https://${shop}/admin/themes/current/editor?template=product&addAppBlockId=${SHOPIFY_CONTRACT_EXT_ID}%2Fapp-block&target=newAppsSection`} external={true}>Product detail page editor with this app block</Link></Badge> to enable the plan selector built as <Link url={`https://github.com/benzookapi/shopify-deferred-purchase-sample-app/tree/main/extensions/my-theme-contract-ext`} external={true}>Theme app extension</Link>.
                             </Layout.Section>
                         </Layout>
                     </Card>
@@ -39,7 +39,7 @@ function Index() {
                                 <Text as="h2" fontWeight="bold">Step 4. Make your order through the checkout</Text>
                             </Layout.Section>
                             <Layout.Section>
-                                Go to <Link url={`https://${shop}`} external={true}>your online store</Link> to select the products with selling plans above chosen to checkout. In <Link url={`https://${_getAdminFromShop(shop)}/orders`} external={true}>Orders</Link>, you will see the latest order you made.
+                                Go to <Link url={`https://${shop}`} external={true}>your online store</Link> to select the products with selling plans above chosen to checkout. In <Link url={`https://${_getAdminFromShop(shop)}/orders`} external={true}>Orders</Link>, you will see the latest order you made with the <Link url={`https://shopify.dev/docs/api/admin-graphql/unstable/objects/PaymentMandate`} target='_blank'>payment mandates</Link>.
                             </Layout.Section>
                         </Layout>
                     </Card>
