@@ -173,7 +173,7 @@ function Create() {
         <InlineStack spacing="loose">
           <TextField
             type="number"
-            label="How many days after you charge"
+            label="How many days later you charge"
             value={days}
             onChange={daysChange}
           />
