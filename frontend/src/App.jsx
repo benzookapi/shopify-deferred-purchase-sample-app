@@ -44,7 +44,7 @@ function App() {
         matcher={(link, location) => link.destination === location.pathname}
       />
       <TitleBar
-        title="Welcome to my deferred pusrchase app &#9996;"
+        title="Welcome to my deferred purchase app &#10024;"
         breadcrumbs={[{ content: "Index", url: '/', target: "APP" }]}
         primaryAction={{ content: 'Code on GitHub', url: 'https://github.com/benzookapi/shopify-deferred-purchase-sample-app', target: "REMOTE", external: true }}
         secondaryActions={[{ content: 'Dev. site', url: 'https://shopify.dev/docs/apps/selling-strategies/purchase-options/deferred/modeling', target: "REMOTE", external: true }]}
