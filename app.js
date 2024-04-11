@@ -319,7 +319,7 @@ router.post('/plans', async (ctx, next) => {
                 "deliveryPolicy": {
                   "fixed": { "fulfillmentTrigger": "ASAP" }
                 },
-                "inventoryPolicy": { "reserve": "ON_SALE" }
+                "inventoryPolicy": { "reserve": "ON_FULFILLMENT" }
               }
             ],
             "sellingPlansToDelete": [
