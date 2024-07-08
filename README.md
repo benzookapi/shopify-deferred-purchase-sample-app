@@ -1,7 +1,7 @@
 # Overview
 A runnable sample app of Deferred Purchase Options = `Pre-order / Try-before-you-buy` app based on [Shopify developer document](https://shopify.dev/docs/apps/selling-strategies/purchase-options/deferred/modeling)
 
-This app is cloned and modified from [this sample app](https://github.com/benzookapi/shopify-barebone-app-sample).
+This app is cloned and modified from [this sample app](../../../shopify-barebone-app-sample).
 
 
 # How to run
