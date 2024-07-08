@@ -74,16 +74,16 @@ Or
 
 # Sample list
 
-All sample videos are available at [Wiki](https://github.com/benzookapi/shopify-deferred-purchase-sample-app/wiki).
+All sample videos are available at [Wiki](../../wiki).
 
 # Trouble shooting
 - If you cannot see any selling plans in your product pages in the storefront through the theme app extension in your dev. store, **try to activate Shopify Payments test mode or PayPal live mode** because Shopify purchase options (subscription / deferred purchase) limit the available payment methods (even if you activate PayPal, you can use Boogus gateway for test credit card payment, tho...).
 
 # TIPS
 - Note that making selling plans does **NOT** mean charging the remaining balance and fulfillments are done by Shopify automatically, all those operations need to be done by merchants manually or by the app using corresponding APIs like [orderCreateMandatePayment](https://shopify.dev/docs/api/admin-graphql/unstable/mutations/orderCreateMandatePayment) and [fulfillmentCreateV2](https://shopify.dev/docs/api/admin-graphql/unstable/mutations/fulfillmentCreateV2) as described [here](https://shopify.dev/docs/apps/selling-strategies/purchase-options/deferred#charging-the-remaining-balance). For the app responsibility, check [this page](https://shopify.dev/docs/apps/selling-strategies/purchase-options/deferred/modeling#division-of-responsibilities-between-shopify-and-apps).
-- [Shopify new customer accounts](https://help.shopify.com/en/manual/customers/customer-accounts/new-customer-accounts) my page supports deferred purchase options natively, so you don't have to integrate any code if the merchant use it instead of the classic one. See the [Wiki](https://github.com/benzookapi/shopify-deferred-purchase-sample-app/wiki) screenshot.
+- [Shopify new customer accounts](https://help.shopify.com/en/manual/customers/customer-accounts/new-customer-accounts) my page supports deferred purchase options natively, so you don't have to integrate any code if the merchant use it instead of the classic one. See the [Wiki](../../wiki) screenshot.
 - You can use the endpoint of `webhookgdpr` for [GDPR Webhooks](https://shopify.dev/docs/apps/store/security/gdpr-webhooks).
-- [Subscriptions](https://shopify.dev/docs/apps/selling-strategies/subscriptions) uses the similar APIs, and if you are interested in, check [this sample](https://github.com/benzookapi/shopify-subscription-sample-app), too.
+- [Subscriptions](https://shopify.dev/docs/apps/selling-strategies/subscriptions) uses the similar APIs, and if you are interested in, check [this sample](../shopify-subscription-sample-app), too.
 
 # Disclaimer
 
