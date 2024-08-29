@@ -294,7 +294,9 @@ router.post('/plans', async (ctx, next) => {
             "productVariantIds": (variant_id === '' ? [] : [variant_id])
           }
         };
+        console.log(`AAAAAAAAAAAAAAA  ${days}`);
         if (days > 0) {
+          console.log(`BBBBBBBBB  ${days}`);
           variables.input.sellingPlansToCreate[0].billingPolicy.fixed.remainingBalanceChargeTimeAfterCheckout = `P${days}D`;
         }
       } else {
