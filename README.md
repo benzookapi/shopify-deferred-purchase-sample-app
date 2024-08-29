@@ -84,6 +84,7 @@ All sample videos are available at [Wiki](../../wiki).
 - [Shopify new customer accounts](https://help.shopify.com/en/manual/customers/customer-accounts/new-customer-accounts) my page supports deferred purchase options natively, so you don't have to integrate any code if the merchant use it instead of the classic one. See the [Wiki](../../wiki) screenshot.
 - You can use the endpoint of `webhookgdpr` for [GDPR Webhooks](https://shopify.dev/docs/apps/store/security/gdpr-webhooks).
 - [Subscriptions](https://shopify.dev/docs/apps/selling-strategies/subscriptions) uses the similar APIs, and if you are interested in, check [this sample](../../../shopify-subscription-sample-app), too.
+- **If you offer 0 paid (charged) pre-order as major marketplaces do like Amazon, Rakuten, set checkout percentage 0 and due date your cancel deadline.**
 
 # Disclaimer
 
