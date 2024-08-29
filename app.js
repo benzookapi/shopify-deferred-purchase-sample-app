@@ -264,7 +264,9 @@ router.post('/plans', async (ctx, next) => {
                 "category": "PRE_ORDER",
                 "billingPolicy": {
                   "fixed": {
-                    "checkoutCharge": { "type": "PERCENTAGE", "value": { "percentage": percentage } }
+                    "checkoutCharge": { "type": "PERCENTAGE", "value": { "percentage": percentage } },
+                    "remainingBalanceChargeTrigger": "TIME_AFTER_CHECKOUT",
+                    "remainingBalanceChargeTimeAfterCheckout": `P${days}D`
                   }
                 },
                 "deliveryPolicy": {
@@ -309,7 +311,9 @@ router.post('/plans', async (ctx, next) => {
                 "category": "TRY_BEFORE_YOU_BUY",
                 "billingPolicy": {
                   "fixed": {
-                    "checkoutCharge": { "type": "PRICE", "value": { "fixedValue": 0 } }
+                    "checkoutCharge": { "type": "PRICE", "value": { "fixedValue": 0 } },
+                    "remainingBalanceChargeTrigger": "TIME_AFTER_CHECKOUT",
+                    "remainingBalanceChargeTimeAfterCheckout": `P${days}D`
                   }
                 },
                 "deliveryPolicy": {
@@ -331,12 +335,6 @@ router.post('/plans', async (ctx, next) => {
           }
         };
 
-      }
-      console.log(`CCCCCCC  ${days}`);
-      if (days > 0) {
-        console.log(`DDDDDD  ${days}`);
-        variables.input.sellingPlansToCreate[0].billingPolicy.fixed.remainingBalanceChargeTrigger = 'TIME_AFTER_CHECKOUT';
-        variables.input.sellingPlansToCreate[0].billingPolicy.fixed.remainingBalanceChargeTimeAfterCheckout = `P${days}D`;
       }
       break;
     case 'remove':
