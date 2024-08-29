@@ -265,8 +265,7 @@ router.post('/plans', async (ctx, next) => {
                 "billingPolicy": {
                   "fixed": {
                     "checkoutCharge": { "type": "PERCENTAGE", "value": { "percentage": percentage } },
-                    "remainingBalanceChargeTrigger": "TIME_AFTER_CHECKOUT",
-                    "remainingBalanceChargeTimeAfterCheckout": `P${days}D`
+                    "remainingBalanceChargeTrigger": "TIME_AFTER_CHECKOUT"
                   }
                 },
                 "deliveryPolicy": {
@@ -295,6 +294,9 @@ router.post('/plans', async (ctx, next) => {
             "productVariantIds": (variant_id === '' ? [] : [variant_id])
           }
         };
+        if (days > 0) {
+          variables.input.sellingPlansToCreate[0].billingPolicy.fixed.remainingBalanceChargeTimeAfterCheckout = `P${days}D`;
+        }
       } else {
         variables = {
           "input": {
