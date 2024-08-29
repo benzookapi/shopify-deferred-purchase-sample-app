@@ -264,8 +264,7 @@ router.post('/plans', async (ctx, next) => {
                 "category": "PRE_ORDER",
                 "billingPolicy": {
                   "fixed": {
-                    "checkoutCharge": { "type": "PERCENTAGE", "value": { "percentage": percentage } },
-                    "remainingBalanceChargeTrigger": "TIME_AFTER_CHECKOUT"
+                    "checkoutCharge": { "type": "PERCENTAGE", "value": { "percentage": percentage } }
                   }
                 },
                 "deliveryPolicy": {
@@ -294,11 +293,6 @@ router.post('/plans', async (ctx, next) => {
             "productVariantIds": (variant_id === '' ? [] : [variant_id])
           }
         };
-        console.log(`AAAAAAAAAAAAAAA  ${days}`);
-        if (days > 0) {
-          console.log(`BBBBBBBBB  ${days}`);
-          variables.input.sellingPlansToCreate[0].billingPolicy.fixed.remainingBalanceChargeTimeAfterCheckout = `P${days}D`;
-        }
       } else {
         variables = {
           "input": {
@@ -315,9 +309,7 @@ router.post('/plans', async (ctx, next) => {
                 "category": "TRY_BEFORE_YOU_BUY",
                 "billingPolicy": {
                   "fixed": {
-                    "checkoutCharge": { "type": "PRICE", "value": { "fixedValue": 0 } },
-                    "remainingBalanceChargeTrigger": "TIME_AFTER_CHECKOUT",
-                    "remainingBalanceChargeTimeAfterCheckout": `P${days}D`
+                    "checkoutCharge": { "type": "PRICE", "value": { "fixedValue": 0 } }
                   }
                 },
                 "deliveryPolicy": {
@@ -339,6 +331,12 @@ router.post('/plans', async (ctx, next) => {
           }
         };
 
+      }
+      console.log(`CCCCCCC  ${days}`);
+      if (days > 0) {
+        console.log(`DDDDDD  ${days}`);
+        variables.input.sellingPlansToCreate[0].billingPolicy.fixed.remainingBalanceChargeTrigger = 'TIME_AFTER_CHECKOUT';
+        variables.input.sellingPlansToCreate[0].billingPolicy.fixed.remainingBalanceChargeTimeAfterCheckout = `P${days}D`;
       }
       break;
     case 'remove':
