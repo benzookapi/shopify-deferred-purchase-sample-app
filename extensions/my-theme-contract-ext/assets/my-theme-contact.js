@@ -1,5 +1,5 @@
 // In this app, we are trying to add the subscription selector into the existing parent theme forms.
-const cart_add_forms = document.querySelectorAll('form[action="/cart/add"]');
+const cart_add_forms = document.querySelectorAll('form[action$="/cart/add"]');
 cart_add_forms.forEach((form) => {
     console.log(`cart_add_forms: ${form.innerHTML}`);
     // Adding the subscription options to the existing form.
