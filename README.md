@@ -91,4 +91,3 @@ All sample videos are available at [Wiki](../../wiki).
 - This code is fully _unofficial_ and NOT guaranteed to pass [the public app review](https://shopify.dev/apps/store/review) for Shopify app store. The official requirements are described [here](https://shopify.dev/apps/store/requirements). 
 - You need to follow [Shopi API Licene and Terms of Use](https://www.shopify.com/legal/api-terms) even for custom app usage.
 - If you use this code for your production, **all resposibilties are owned by you**.
-
