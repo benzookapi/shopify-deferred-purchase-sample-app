@@ -312,8 +312,8 @@ router.post('/plans', async (ctx, next) => {
                 "billingPolicy": {
                   "fixed": {
                     "checkoutCharge": { "type": "PRICE", "value": { "fixedValue": 0 } },
-                    "remainingBalanceChargeTrigger": "TIME_AFTER_CHECKOUT",
-                    "remainingBalanceChargeTimeAfterCheckout": `P${days}D`
+                    "remainingBalanceChargeTrigger": "NO_REMAINING_BALANCE",
+                   // "remainingBalanceChargeTimeAfterCheckout": `P${days}D`
                   }
                 },
                 "deliveryPolicy": {
