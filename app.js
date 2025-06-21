@@ -311,9 +311,9 @@ router.post('/plans', async (ctx, next) => {
                 "category": "TRY_BEFORE_YOU_BUY",
                 "billingPolicy": {
                   "fixed": {
-                    "checkoutCharge": { "type": "PERCENTAGE", "value": { "percentage": 100 } },
-                    "remainingBalanceChargeTrigger": "NO_REMAINING_BALANCE",
-                   // "remainingBalanceChargeTimeAfterCheckout": `P${days}D`
+                    "checkoutCharge": { "type": "PRICE", "value": { "fixedValue": 0 } },
+                    //"remainingBalanceChargeTrigger": "TIME_AFTER_CHECKOUT",
+                    //"remainingBalanceChargeTimeAfterCheckout": `P${days}D`
                   }
                 },
                 "deliveryPolicy": {
